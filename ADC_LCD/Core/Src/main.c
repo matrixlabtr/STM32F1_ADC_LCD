@@ -45,6 +45,19 @@ UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 
+float data=0;
+
+void ReadADC()
+{
+	HAL_ADC_Start(&hadc1);
+	if(HAL_ADC_PollForConversion(&hadc1, HAL_TIMEOUT) == HAL_OK)
+	{
+		data = HAL_ADC_GetValue(&hadc1);
+	}
+	HAL_ADC_Stop(&hadc1);
+}
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -53,6 +66,7 @@ static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
+
 
 /* USER CODE END PFP */
 
@@ -102,6 +116,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+
   }
   /* USER CODE END 3 */
 }
