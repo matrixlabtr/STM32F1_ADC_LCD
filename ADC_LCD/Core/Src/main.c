@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,7 +46,7 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 
 float data=0;
-
+char tx_buffer[10]={" "};
 void ReadADC()
 {
 	HAL_ADC_Start(&hadc1);
@@ -116,6 +116,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	ReadADC();
+	data = 3.3 * data/4096;
+	sprintf(tx_buffer, "%.2f ",data);
+	HAL_UART_Transmit(&huart1, (uint8_t *)tx_buffer, sizeof(tx_buffer), HAL_TIMEOUT);
+	HAL_Delay(1000);
 
 
   }
